@@ -33,6 +33,16 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
 
   const colorClass = CARD_COLORS[community.name.charCodeAt(0) % CARD_COLORS.length]
 
+  function truncateAtWord(text: string, max: number) {
+    if (text.length <= max) return text
+    const cut = text.slice(0, max)
+    const lastSpace = cut.lastIndexOf(' ')
+    return (lastSpace > 0 ? cut.slice(0, lastSpace) : cut) + '…'
+  }
+
+  const bannerText = truncateAtWord(community.name, 8)
+  const bannerFontSize = bannerText.length <= 4 ? 'text-3xl' : bannerText.length <= 6 ? 'text-2xl' : 'text-xl'
+
   async function handleDelete(e: React.FormEvent) {
     e.preventDefault()
     setDeleteError('')
@@ -60,8 +70,8 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
           className={`bg-gradient-to-br ${colorClass} w-full h-24 flex items-center justify-center`}
           aria-label={`${community.name} 수다방 입장`}
         >
-          <span className="text-4xl font-black text-white drop-shadow">
-            {community.name[0]}
+          <span className={`${bannerFontSize} font-black text-white drop-shadow text-center px-3 leading-tight`}>
+            {bannerText}
           </span>
         </button>
 
