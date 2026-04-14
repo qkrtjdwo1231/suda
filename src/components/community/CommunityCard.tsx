@@ -6,6 +6,17 @@ import CommunityPasswordModal from '@/components/community/CommunityPasswordModa
 import CommunityForm from '@/components/community/CommunityForm'
 import type { Community } from '@/types/community'
 
+const CARD_COLORS = [
+  'from-rose-400 to-pink-500',
+  'from-orange-400 to-amber-500',
+  'from-emerald-400 to-teal-500',
+  'from-cyan-400 to-blue-500',
+  'from-violet-400 to-purple-500',
+  'from-blue-400 to-indigo-500',
+  'from-pink-400 to-rose-500',
+  'from-teal-400 to-emerald-500',
+]
+
 interface CommunityCardProps {
   community: Community
   onUpdate: (updated: Community) => void
@@ -19,6 +30,8 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
   const [deletePassword, setDeletePassword] = useState('')
   const [deleteError, setDeleteError] = useState('')
   const [deleteLoading, setDeleteLoading] = useState(false)
+
+  const colorClass = CARD_COLORS[community.name.charCodeAt(0) % CARD_COLORS.length]
 
   async function handleDelete(e: React.FormEvent) {
     e.preventDefault()
@@ -40,39 +53,52 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
 
   return (
     <>
-      <div className="flex items-center justify-between px-4 py-4 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors border-b border-neutral-100 dark:border-neutral-800">
+      <div className="flex flex-col rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#1a1a1a] shadow-sm hover:shadow-md transition-shadow">
+        {/* 카드 상단 컬러 배너 */}
         <button
           onClick={() => setShowEnter(true)}
-          className="flex items-center gap-3 flex-1 min-w-0 text-left"
+          className={`bg-gradient-to-br ${colorClass} w-full h-24 flex items-center justify-center`}
+          aria-label={`${community.name} 수다방 입장`}
         >
-          <div className="w-10 h-10 rounded-full bg-neutral-900 dark:bg-white flex items-center justify-center shrink-0">
-            <span className="text-white dark:text-neutral-900 font-bold text-sm">
-              {community.name[0]}
-            </span>
-          </div>
-          <div className="min-w-0">
-            <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+          <span className="text-4xl font-black text-white drop-shadow">
+            {community.name[0]}
+          </span>
+        </button>
+
+        {/* 카드 하단 정보 */}
+        <div className="px-4 py-3 flex flex-col gap-2">
+          <button
+            onClick={() => setShowEnter(true)}
+            className="text-left"
+          >
+            <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100 truncate">
               {community.name}
             </p>
             <p className="text-xs text-neutral-400 mt-0.5">
               {formatRelativeTime(community.created_at)} 개설
             </p>
-          </div>
-        </button>
+          </button>
 
-        <div className="flex items-center gap-1 shrink-0 ml-2">
-          <button
-            onClick={() => setShowEdit(true)}
-            className="px-2.5 py-1.5 text-xs text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
-          >
-            수정
-          </button>
-          <button
-            onClick={() => setShowDeleteConfirm(true)}
-            className="px-2.5 py-1.5 text-xs text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg transition-colors"
-          >
-            삭제
-          </button>
+          <div className="flex items-center gap-1 pt-1 border-t border-neutral-100 dark:border-neutral-800">
+            <button
+              onClick={() => setShowEnter(true)}
+              className="flex-1 py-1.5 text-xs font-semibold text-white bg-neutral-900 dark:bg-white dark:text-neutral-900 rounded-lg hover:opacity-80 transition-opacity"
+            >
+              입장
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowEdit(true) }}
+              className="px-3 py-1.5 text-xs text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
+            >
+              수정
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowDeleteConfirm(true) }}
+              className="px-3 py-1.5 text-xs text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg transition-colors"
+            >
+              삭제
+            </button>
+          </div>
         </div>
       </div>
 
@@ -95,7 +121,7 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
           <form onSubmit={handleDelete} className="relative w-full sm:max-w-lg mx-auto bg-white dark:bg-[#1e1e1e] rounded-t-2xl sm:rounded-2xl shadow-xl z-10 p-5 space-y-4">
             <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">수다방 삭제</h2>
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
-              <span className="font-medium text-neutral-900 dark:text-neutral-100">{community.name}</span> 수다방와 내부 글이 모두 삭제됩니다.
+              <span className="font-medium text-neutral-900 dark:text-neutral-100">{community.name}</span> 수다방과 내부 글이 모두 삭제됩니다.
             </p>
             <input
               type="password"

@@ -56,10 +56,10 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
 
         {communities.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-neutral-400">
-            <p className="text-base">아직 수다방가 없어요. 첫 수다방를 만들어보세요!</p>
+            <p className="text-base">아직 수다방이 없어요. 첫 수다방을 만들어보세요!</p>
           </div>
         ) : (
-          <ul>
+          <ul className="grid grid-cols-2 gap-4 p-4">
             {communities.map((community) => (
               <li key={community.id}>
                 <CommunityCard
