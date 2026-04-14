@@ -25,3 +25,43 @@ body {
     'Apple SD Gothic Neo', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ── 벚꽃 애니메이션 ── */
+.cherry-blossom-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -20px;
+  border-radius: 50% 0 50% 0;
+  background: radial-gradient(circle at 30% 30%, #ffd6e0, #ffaabb);
+  opacity: 0.75;
+  animation: petalFall linear infinite;
+}
+
+.dark .petal {
+  background: radial-gradient(circle at 30% 30%, #ff8fa8, #d6607a);
+  opacity: 0.45;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.75;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(105vh) translateX(var(--sway)) rotate(var(--rotation));
+    opacity: 0;
+  }
+}

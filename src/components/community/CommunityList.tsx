@@ -4,6 +4,7 @@ import { useState } from 'react'
 import CommunityCard from '@/components/community/CommunityCard'
 import CommunityForm from '@/components/community/CommunityForm'
 import ThemeToggle from '@/components/ui/ThemeToggle'
+import CherryBlossom from '@/components/ui/CherryBlossom'
 import type { Community } from '@/types/community'
 
 interface CommunityListProps {
@@ -28,6 +29,7 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
 
   return (
     <>
+      <CherryBlossom />
       {/* 헤더 */}
       <header className="sticky top-0 z-40 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-[#101010]/80 backdrop-blur-md">
         <div className="max-w-[640px] mx-auto flex items-center justify-between px-4 h-14">
@@ -47,7 +49,7 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
         </div>
       </header>
 
-      <main className="max-w-[640px] mx-auto w-full">
+      <main className="relative z-10 max-w-[640px] mx-auto w-full">
         <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-800">
           <p className="text-sm text-neutral-500 dark:text-neutral-400">
             총 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{communities.length}</span>개의 수다방
