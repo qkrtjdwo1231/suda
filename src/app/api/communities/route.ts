@@ -22,11 +22,11 @@ export async function POST(request: NextRequest) {
   const { name, password } = body
 
   if (!name?.trim() || !password?.trim()) {
-    return NextResponse.json({ error: '커뮤니티 이름과 비밀번호를 입력해주세요.' }, { status: 400 })
+    return NextResponse.json({ error: '수다방 이름과 비밀번호를 입력해주세요.' }, { status: 400 })
   }
 
   if (name.length > 30) {
-    return NextResponse.json({ error: '커뮤니티 이름은 30자 이내로 입력해주세요.' }, { status: 400 })
+    return NextResponse.json({ error: '수다방 이름은 30자 이내로 입력해주세요.' }, { status: 400 })
   }
 
   if (password.length < 4 || password.length > 20) {
@@ -44,9 +44,10 @@ export async function POST(request: NextRequest) {
 
   if (error) {
     if (error.code === '23505') {
-      return NextResponse.json({ error: '이미 존재하는 커뮤니티 이름입니다.' }, { status: 409 })
+      return NextResponse.json({ error: '이미 존재하는 수다방 이름입니다.' }, { status: 409 })
     }
-    return NextResponse.json({ error: '커뮤니티 생성에 실패했습니다.' }, { status: 500 })
+    console.error('[POST /api/communities]', error)
+    return NextResponse.json({ error: `수다방 생성에 실패했습니다. (${error.message})` }, { status: 500 })
   }
 
   return NextResponse.json(data, { status: 201 })

@@ -22,7 +22,7 @@ export async function POST(request: NextRequest, { params }: Params) {
     .single()
 
   if (error || !community) {
-    return NextResponse.json({ error: '커뮤니티를 찾을 수 없습니다.' }, { status: 404 })
+    return NextResponse.json({ error: '수다방를 찾을 수 없습니다.' }, { status: 404 })
   }
 
   const isValid = await verifyPassword(password, community.password_hash)

@@ -93,9 +93,9 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowDeleteConfirm(false)} />
           <form onSubmit={handleDelete} className="relative w-full sm:max-w-lg mx-auto bg-white dark:bg-[#1e1e1e] rounded-t-2xl sm:rounded-2xl shadow-xl z-10 p-5 space-y-4">
-            <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">커뮤니티 삭제</h2>
+            <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">수다방 삭제</h2>
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
-              <span className="font-medium text-neutral-900 dark:text-neutral-100">{community.name}</span> 커뮤니티와 내부 글이 모두 삭제됩니다.
+              <span className="font-medium text-neutral-900 dark:text-neutral-100">{community.name}</span> 수다방와 내부 글이 모두 삭제됩니다.
             </p>
             <input
               type="password"

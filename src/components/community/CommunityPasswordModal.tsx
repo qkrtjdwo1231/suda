@@ -48,7 +48,7 @@ export default function CommunityPasswordModal({ community, onClose }: Community
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-              커뮤니티 입장
+              수다방 입장
             </h2>
             <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">{community.name}</p>
           </div>

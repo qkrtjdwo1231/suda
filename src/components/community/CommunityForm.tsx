@@ -61,7 +61,7 @@ export default function CommunityForm({ mode, community, onClose, onSuccess }: C
       <form onSubmit={handleSubmit} className="p-5 space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-            {isEdit ? '커뮤니티 수정' : '새 커뮤니티 만들기'}
+            {isEdit ? '수다방 수정' : '새 수다방 만들기'}
           </h2>
           <button type="button" onClick={onClose} aria-label="닫기"
             className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200">✕</button>
@@ -72,10 +72,10 @@ export default function CommunityForm({ mode, community, onClose, onSuccess }: C
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="커뮤니티 이름 (예: 컴퓨터공학과)"
+            placeholder="수다방 이름 (컴퓨터공학과, 경영학과 등)"
             maxLength={30}
             required={!isEdit}
-            aria-label="커뮤니티 이름"
+            aria-label="수다방 이름"
             className="w-full px-3 py-2.5 text-sm rounded-xl border border-neutral-200 dark:border-neutral-700 bg-transparent text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 outline-none focus:border-neutral-400 dark:focus:border-neutral-500"
           />
 
@@ -112,7 +112,7 @@ export default function CommunityForm({ mode, community, onClose, onSuccess }: C
           disabled={loading}
           className="w-full py-2.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-semibold disabled:opacity-50 hover:opacity-80 transition-opacity"
         >
-          {loading ? '처리 중...' : isEdit ? '수정하기' : '커뮤니티 만들기'}
+          {loading ? '처리 중...' : isEdit ? '수정하기' : '수다방 만들기'}
         </button>
       </form>
     </Modal>

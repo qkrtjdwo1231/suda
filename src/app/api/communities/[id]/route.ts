@@ -22,7 +22,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     .single()
 
   if (fetchError || !community) {
-    return NextResponse.json({ error: '커뮤니티를 찾을 수 없습니다.' }, { status: 404 })
+    return NextResponse.json({ error: '수다방를 찾을 수 없습니다.' }, { status: 404 })
   }
 
   const isValid = await verifyPassword(password, community.password_hash)
@@ -46,7 +46,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 
   if (updateError) {
     if (updateError.code === '23505') {
-      return NextResponse.json({ error: '이미 존재하는 커뮤니티 이름입니다.' }, { status: 409 })
+      return NextResponse.json({ error: '이미 존재하는 수다방 이름입니다.' }, { status: 409 })
     }
     return NextResponse.json({ error: '수정에 실패했습니다.' }, { status: 500 })
   }
@@ -72,7 +72,7 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     .single()
 
   if (fetchError || !community) {
-    return NextResponse.json({ error: '커뮤니티를 찾을 수 없습니다.' }, { status: 404 })
+    return NextResponse.json({ error: '수다방를 찾을 수 없습니다.' }, { status: 404 })
   }
 
   const isValid = await verifyPassword(password, community.password_hash)

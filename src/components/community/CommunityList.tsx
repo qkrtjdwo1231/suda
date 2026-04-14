@@ -41,7 +41,7 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              새 커뮤니티
+              새 수다방
             </button>
           </div>
         </div>
@@ -50,13 +50,13 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
       <main className="max-w-[640px] mx-auto w-full">
         <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-800">
           <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            총 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{communities.length}</span>개의 커뮤니티
+            총 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{communities.length}</span>개의 수다방
           </p>
         </div>
 
         {communities.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-neutral-400">
-            <p className="text-base">아직 커뮤니티가 없어요. 첫 커뮤니티를 만들어보세요!</p>
+            <p className="text-base">아직 수다방가 없어요. 첫 수다방를 만들어보세요!</p>
           </div>
         ) : (
           <ul>
