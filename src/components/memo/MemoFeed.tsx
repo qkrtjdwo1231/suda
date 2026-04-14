@@ -130,11 +130,10 @@ export default function MemoFeed({ initialMemos, communityId, communityName }: M
             </p>
           </div>
         ) : (
-          <ul className="md:grid md:grid-cols-2 md:gap-px md:bg-neutral-100 dark:md:bg-neutral-800">
-            {filtered.map((memo, i) => (
-              <li key={memo.id} className="md:bg-white dark:md:bg-[#101010]">
+          <ul className="md:grid md:grid-cols-2 py-2">
+            {filtered.map((memo) => (
+              <li key={memo.id}>
                 <MemoItem memo={memo} onClick={setSelected} />
-                {i < filtered.length - 1 && <div className="border-b border-neutral-100 dark:border-neutral-800 mx-4 md:hidden" />}
               </li>
             ))}
           </ul>

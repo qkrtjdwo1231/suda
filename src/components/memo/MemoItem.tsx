@@ -11,7 +11,7 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
   return (
     <article
       onClick={() => onClick(memo)}
-      className="flex gap-3 px-4 md:px-8 py-4 md:py-5 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
+      className="flex gap-3 px-4 md:px-6 py-4 md:py-5 mx-4 md:mx-6 my-2 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#1a1a1a] cursor-pointer hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700 transition-all"
     >
       <AnonymousAvatar
         seed={memo.id}
@@ -20,9 +20,6 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
       />
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2 mb-1">
-          <span className="text-sm md:text-base font-semibold text-neutral-900 dark:text-neutral-100">
-            {memo.nickname ?? '익명'}
-          </span>
           <time className="text-xs md:text-sm text-neutral-400 shrink-0" dateTime={memo.created_at}>
             {formatRelativeTime(memo.created_at)}
           </time>
