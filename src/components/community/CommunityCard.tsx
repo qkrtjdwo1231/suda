@@ -124,7 +124,7 @@ export default function CommunityCard({ community, index, onUpdate, onDelete }: 
           <div className="flex items-center gap-1 pt-1 border-t border-neutral-100 dark:border-neutral-800">
             <button
               onClick={() => setShowEnter(true)}
-              className="flex-1 py-1.5 text-xs font-semibold text-white bg-neutral-900 dark:bg-white dark:text-neutral-900 rounded-lg hover:opacity-80 transition-opacity"
+              className="flex-1 py-1.5 text-xs font-semibold text-white bg-[#64748B] rounded-lg hover:opacity-80 transition-opacity"
             >
               입장
             </button>

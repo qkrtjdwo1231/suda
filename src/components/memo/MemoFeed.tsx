@@ -114,7 +114,7 @@ export default function MemoFeed({ initialMemos, communityId, communityName }: M
           </p>
           <button
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-semibold hover:opacity-80 transition-opacity"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-[#64748B] text-white text-sm font-semibold hover:opacity-80 transition-opacity"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
