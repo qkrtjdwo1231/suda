@@ -18,12 +18,7 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
         nickname={memo.nickname}
         profileImageUrl={memo.profile_image_url}
       />
-      <div className="flex-1 min-w-0">
-        <div className="flex items-baseline justify-between gap-2 mb-1">
-          <time className="text-xs md:text-sm text-neutral-400 shrink-0" dateTime={memo.created_at}>
-            {formatRelativeTime(memo.created_at)}
-          </time>
-        </div>
+      <div className="flex-1 min-w-0 flex flex-col">
         <p className="text-sm md:text-base font-medium text-neutral-900 dark:text-neutral-100 mb-1 truncate">
           {memo.title}
         </p>
@@ -36,6 +31,9 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
             <img src={memo.image_url} alt="첨부 이미지" className="w-full h-full object-cover" />
           </div>
         )}
+        <time className="mt-2 text-xs text-neutral-400 self-end" dateTime={memo.created_at}>
+          {formatRelativeTime(memo.created_at)}
+        </time>
       </div>
     </article>
   )
