@@ -8,7 +8,6 @@ import MemoDetail from '@/components/memo/MemoDetail'
 import MemoForm from '@/components/memo/MemoForm'
 import SearchBar from '@/components/ui/SearchBar'
 import ThemeToggle from '@/components/ui/ThemeToggle'
-import FabButton from '@/components/layout/FabButton'
 import type { Memo } from '@/types/memo'
 
 interface MemoFeedProps {
@@ -83,9 +82,9 @@ export default function MemoFeed({ initialMemos, communityId, communityName }: M
     <>
       {/* 헤더 */}
       <header className="sticky top-0 z-40 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-[#101010]/80 backdrop-blur-md">
-        <div className="max-w-[640px] mx-auto flex items-center gap-2 px-4 h-14">
+        <div className="max-w-[640px] md:max-w-[900px] lg:max-w-[1100px] mx-auto flex items-center gap-2 px-4 md:px-8 h-14 md:h-16">
           <div className="flex-1 min-w-0">
-            <p className="text-base font-bold text-neutral-900 dark:text-neutral-100 truncate">{communityName}</p>
+            <p className="text-base md:text-lg font-bold text-neutral-900 dark:text-neutral-100 truncate">{communityName}</p>
           </div>
           <SearchBar onSearch={handleSearch} />
           <ThemeToggle />
@@ -104,36 +103,43 @@ export default function MemoFeed({ initialMemos, communityId, communityName }: M
         </div>
       </header>
 
-      <main className="max-w-[640px] mx-auto w-full pb-24">
-        <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-800">
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+      <main className="max-w-[640px] md:max-w-[900px] lg:max-w-[1100px] mx-auto w-full">
+        <div className="px-4 md:px-8 py-3 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+          <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400">
             {search ? (
               <><span className="font-medium text-neutral-900 dark:text-neutral-100">&apos;{search}&apos;</span> 검색 결과 {filtered.length}개</>
             ) : (
               <>총 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{memos.length}</span>개의 수다</>
             )}
           </p>
+          <button
+            onClick={() => setShowCreate(true)}
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-semibold hover:opacity-80 transition-opacity"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            수다 쓰기
+          </button>
         </div>
 
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-neutral-400">
-            <p className="text-base">
+            <p className="text-base md:text-lg">
               {search ? `'${search}'에 대한 결과가 없습니다.` : '아직 수다가 없어요. 첫 글을 남겨보세요!'}
             </p>
           </div>
         ) : (
-          <ul>
+          <ul className="md:grid md:grid-cols-2 md:gap-px md:bg-neutral-100 dark:md:bg-neutral-800">
             {filtered.map((memo, i) => (
-              <li key={memo.id}>
+              <li key={memo.id} className="md:bg-white dark:md:bg-[#101010]">
                 <MemoItem memo={memo} onClick={setSelected} />
-                {i < filtered.length - 1 && <div className="border-b border-neutral-100 dark:border-neutral-800 mx-4" />}
+                {i < filtered.length - 1 && <div className="border-b border-neutral-100 dark:border-neutral-800 mx-4 md:hidden" />}
               </li>
             ))}
           </ul>
         )}
       </main>
-
-      <FabButton onClick={() => setShowCreate(true)} />
 
       {showCreate && (
         <MemoForm mode="create" communityId={communityId} onClose={() => setShowCreate(false)} onSuccess={handleCreate} />

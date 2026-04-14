@@ -11,7 +11,7 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
   return (
     <article
       onClick={() => onClick(memo)}
-      className="flex gap-3 px-4 py-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
+      className="flex gap-3 px-4 md:px-8 py-4 md:py-5 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
     >
       <AnonymousAvatar
         seed={memo.id}
@@ -20,17 +20,17 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
       />
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2 mb-1">
-          <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+          <span className="text-sm md:text-base font-semibold text-neutral-900 dark:text-neutral-100">
             {memo.nickname ?? '익명'}
           </span>
-          <time className="text-xs text-neutral-400 shrink-0" dateTime={memo.created_at}>
+          <time className="text-xs md:text-sm text-neutral-400 shrink-0" dateTime={memo.created_at}>
             {formatRelativeTime(memo.created_at)}
           </time>
         </div>
-        <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-1 truncate">
+        <p className="text-sm md:text-base font-medium text-neutral-900 dark:text-neutral-100 mb-1 truncate">
           {memo.title}
         </p>
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-3 break-words">
+        <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400 line-clamp-3 break-words">
           {memo.content}
         </p>
         {memo.image_url && (

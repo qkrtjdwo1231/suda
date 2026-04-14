@@ -32,7 +32,7 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
       <CherryBlossom />
       {/* 헤더 */}
       <header className="sticky top-0 z-40 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-[#101010]/80 backdrop-blur-md">
-        <div className="max-w-[640px] mx-auto flex items-center justify-between px-4 h-14">
+        <div className="max-w-[640px] md:max-w-[900px] lg:max-w-[1100px] mx-auto flex items-center justify-between px-4 md:px-8 h-14 md:h-16">
           <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">수다</h1>
           <div className="flex items-center gap-2">
             <ThemeToggle />
@@ -49,9 +49,9 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
         </div>
       </header>
 
-      <main className="relative z-10 max-w-[640px] mx-auto w-full">
-        <div className="px-4 py-3 border-b border-neutral-200 dark:border-neutral-800">
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+      <main className="relative z-10 max-w-[640px] md:max-w-[900px] lg:max-w-[1100px] mx-auto w-full">
+        <div className="px-4 md:px-8 py-3 border-b border-neutral-200 dark:border-neutral-800">
+          <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400">
             총 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{communities.length}</span>개의 수다방
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
             <p className="text-base">아직 수다방이 없어요. 첫 수다방을 만들어보세요!</p>
           </div>
         ) : (
-          <ul className="grid grid-cols-2 gap-4 p-4">
+          <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 md:p-8">
             {communities.map((community, index) => (
               <li key={community.id}>
                 <CommunityCard
