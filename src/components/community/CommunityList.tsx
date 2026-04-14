@@ -62,10 +62,11 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
           </div>
         ) : (
           <ul className="grid grid-cols-2 gap-4 p-4">
-            {communities.map((community) => (
+            {communities.map((community, index) => (
               <li key={community.id}>
                 <CommunityCard
                   community={community}
+                  index={index}
                   onUpdate={handleUpdate}
                   onDelete={handleDelete}
                 />

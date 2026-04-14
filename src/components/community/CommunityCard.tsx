@@ -6,55 +6,52 @@ import CommunityPasswordModal from '@/components/community/CommunityPasswordModa
 import CommunityForm from '@/components/community/CommunityForm'
 import type { Community } from '@/types/community'
 
-const CARD_COLORS = [
-  // 핑크·로즈 계열
-  'from-rose-200 to-pink-300',
-  'from-rose-400 to-pink-500',
-  'from-rose-600 to-pink-700',
-  'from-pink-300 to-rose-400',
-  'from-pink-500 to-rose-600',
-  // 오렌지·앰버 계열
-  'from-orange-200 to-amber-300',
+// 처음 10개: 색상환 전체를 커버하는 뚜렷하게 다른 10가지
+const FIRST_COLORS = [
+  'from-red-400 to-red-600',
   'from-orange-400 to-amber-500',
-  'from-orange-600 to-amber-700',
-  'from-amber-300 to-orange-400',
-  // 그린·에메랄드 계열
-  'from-emerald-200 to-teal-300',
+  'from-yellow-300 to-amber-400',
+  'from-lime-400 to-green-500',
   'from-emerald-400 to-teal-500',
+  'from-cyan-400 to-sky-500',
+  'from-blue-400 to-blue-600',
+  'from-indigo-400 to-violet-500',
+  'from-purple-400 to-fuchsia-500',
+  'from-pink-400 to-rose-500',
+]
+
+// 11개 이후: 연하거나 진한 변형 색상들
+const REST_COLORS = [
+  'from-rose-200 to-pink-300',
+  'from-rose-600 to-pink-700',
+  'from-orange-200 to-amber-300',
+  'from-orange-600 to-amber-700',
+  'from-emerald-200 to-teal-300',
   'from-emerald-600 to-teal-700',
-  'from-teal-300 to-emerald-400',
-  // 블루·인디고 계열
   'from-blue-200 to-cyan-300',
-  'from-blue-400 to-indigo-500',
   'from-blue-600 to-indigo-700',
-  'from-cyan-300 to-blue-400',
-  'from-indigo-400 to-blue-500',
-  // 퍼플·바이올렛 계열
   'from-violet-200 to-purple-300',
-  'from-violet-400 to-purple-500',
   'from-violet-600 to-purple-700',
-  'from-purple-300 to-violet-400',
-  // 스카이·틸 계열
-  'from-sky-200 to-teal-300',
-  'from-sky-400 to-cyan-500',
+  'from-sky-300 to-cyan-400',
   'from-sky-600 to-teal-600',
-  // 옐로·라임 계열
-  'from-yellow-200 to-lime-300',
   'from-yellow-400 to-lime-400',
   'from-lime-300 to-green-400',
-  // 레드·오렌지 계열
   'from-red-300 to-orange-400',
-  'from-red-500 to-orange-500',
-  'from-red-700 to-rose-600',
+  'from-red-600 to-rose-600',
+  'from-fuchsia-400 to-pink-500',
+  'from-teal-400 to-emerald-500',
+  'from-amber-400 to-yellow-400',
+  'from-cyan-500 to-blue-500',
 ]
 
 interface CommunityCardProps {
   community: Community
+  index: number
   onUpdate: (updated: Community) => void
   onDelete: (id: string) => void
 }
 
-export default function CommunityCard({ community, onUpdate, onDelete }: CommunityCardProps) {
+export default function CommunityCard({ community, index, onUpdate, onDelete }: CommunityCardProps) {
   const [showEnter, setShowEnter] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
@@ -62,10 +59,11 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
   const [deleteError, setDeleteError] = useState('')
   const [deleteLoading, setDeleteLoading] = useState(false)
 
-  const colorIndex = community.id
-    .split('')
-    .reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % CARD_COLORS.length
-  const colorClass = CARD_COLORS[colorIndex]
+  const colorClass = index < 10
+    ? FIRST_COLORS[index]
+    : REST_COLORS[
+        community.id.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % REST_COLORS.length
+      ]
 
   function truncateAtWord(text: string, max: number) {
     if (text.length <= max) return text
