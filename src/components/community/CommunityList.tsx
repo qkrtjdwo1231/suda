@@ -31,14 +31,14 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
     <>
       <CherryBlossom />
       {/* 헤더 */}
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-[#101010]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-40 w-full border-b border-[#64748B]/40 bg-white/80 dark:bg-[#101010]/80 backdrop-blur-md">
         <div className="max-w-[640px] md:max-w-[900px] lg:max-w-[1100px] mx-auto flex items-center justify-between px-4 md:px-8 h-14 md:h-16">
           <h1 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">수다</h1>
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <button
               onClick={() => setShowCreate(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#64748B] text-white text-sm font-semibold hover:opacity-80 transition-opacity"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-semibold hover:opacity-80 transition-opacity"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -50,7 +50,7 @@ export default function CommunityList({ initialCommunities }: CommunityListProps
       </header>
 
       <main className="relative z-10 max-w-[640px] md:max-w-[900px] lg:max-w-[1100px] mx-auto w-full">
-        <div className="px-4 md:px-8 py-3 border-b border-neutral-200 dark:border-neutral-800">
+        <div className="px-4 md:px-8 py-3 border-b border-[#64748B]/40">
           <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400">
             총 <span className="font-semibold text-neutral-900 dark:text-neutral-100">{communities.length}</span>개의 수다방
           </p>

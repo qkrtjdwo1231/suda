@@ -11,7 +11,7 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
   return (
     <article
       onClick={() => onClick(memo)}
-      className="flex gap-3 px-4 md:px-6 py-4 md:py-5 mx-4 md:mx-6 my-2 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#1a1a1a] cursor-pointer hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700 transition-all"
+      className="flex gap-3 px-4 md:px-6 py-4 md:py-5 mx-4 md:mx-6 my-2 rounded-2xl border border-[#64748B]/40 bg-white dark:bg-[#1a1a1a] cursor-pointer hover:shadow-md hover:border-[#64748B]/70 transition-all"
     >
       <AnonymousAvatar
         seed={memo.id}
