@@ -5,25 +5,31 @@ import { hashPassword } from '@/lib/password'
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const search = searchParams.get('search')?.trim()
+  const communityId = searchParams.get('community_id')
+
+  if (!communityId) {
+    return NextResponse.json({ error: 'community_id가 필요합니다.' }, { status: 400 })
+  }
 
   const supabase = createServiceClient()
 
   let query = supabase
     .from('memos')
     .select('id, title, content, nickname, image_url, profile_image_url, created_at, updated_at')
+    .eq('community_id', communityId)
     .order('created_at', { ascending: false })
 
   if (search) {
     query = query.or(`title.ilike.%${search}%,content.ilike.%${search}%`)
   }
 
-  const { data, error, count } = await query
+  const { data, error } = await query
 
   if (error) {
     return NextResponse.json({ error: '목록을 불러오지 못했습니다.' }, { status: 500 })
   }
 
-  return NextResponse.json({ memos: data ?? [], total: count ?? data?.length ?? 0 })
+  return NextResponse.json({ memos: data ?? [], total: data?.length ?? 0 })
 }
 
 export async function POST(request: NextRequest) {
@@ -34,11 +40,16 @@ export async function POST(request: NextRequest) {
     nickname?: string
     image_url?: string
     profile_image_url?: string
+    community_id?: string
   }
-  const { title, content, password, nickname, image_url, profile_image_url } = body
+  const { title, content, password, nickname, image_url, profile_image_url, community_id } = body
 
   if (!title?.trim() || !content?.trim() || !password?.trim()) {
     return NextResponse.json({ error: '제목, 내용, 비밀번호를 모두 입력해주세요.' }, { status: 400 })
+  }
+
+  if (!community_id) {
+    return NextResponse.json({ error: 'community_id가 필요합니다.' }, { status: 400 })
   }
 
   if (title.length > 100) {
@@ -65,6 +76,7 @@ export async function POST(request: NextRequest) {
       nickname: nickname?.trim() || null,
       image_url: image_url || null,
       profile_image_url: profile_image_url || null,
+      community_id,
     })
     .select('id, created_at')
     .single()

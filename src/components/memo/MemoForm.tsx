@@ -9,11 +9,12 @@ import type { Memo } from '@/types/memo'
 interface MemoFormProps {
   mode: 'create' | 'edit'
   memo?: Memo
+  communityId?: string
   onClose: () => void
   onSuccess: (memo: Memo) => void
 }
 
-export default function MemoForm({ mode, memo, onClose, onSuccess }: MemoFormProps) {
+export default function MemoForm({ mode, memo, communityId, onClose, onSuccess }: MemoFormProps) {
   const [title, setTitle] = useState(memo?.title ?? '')
   const [content, setContent] = useState(memo?.content ?? '')
   const [nickname, setNickname] = useState(memo?.nickname ?? '')
@@ -80,7 +81,7 @@ export default function MemoForm({ mode, memo, onClose, onSuccess }: MemoFormPro
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, content, password, nickname, image_url, profile_image_url }),
+        body: JSON.stringify({ title, content, password, nickname, image_url, profile_image_url, community_id: communityId }),
       })
 
       const data = await res.json() as { error?: string; id?: string; created_at?: string }
