@@ -7,14 +7,45 @@ import CommunityForm from '@/components/community/CommunityForm'
 import type { Community } from '@/types/community'
 
 const CARD_COLORS = [
+  // 핑크·로즈 계열
+  'from-rose-200 to-pink-300',
   'from-rose-400 to-pink-500',
+  'from-rose-600 to-pink-700',
+  'from-pink-300 to-rose-400',
+  'from-pink-500 to-rose-600',
+  // 오렌지·앰버 계열
+  'from-orange-200 to-amber-300',
   'from-orange-400 to-amber-500',
+  'from-orange-600 to-amber-700',
+  'from-amber-300 to-orange-400',
+  // 그린·에메랄드 계열
+  'from-emerald-200 to-teal-300',
   'from-emerald-400 to-teal-500',
-  'from-cyan-400 to-blue-500',
-  'from-violet-400 to-purple-500',
+  'from-emerald-600 to-teal-700',
+  'from-teal-300 to-emerald-400',
+  // 블루·인디고 계열
+  'from-blue-200 to-cyan-300',
   'from-blue-400 to-indigo-500',
-  'from-pink-400 to-rose-500',
-  'from-teal-400 to-emerald-500',
+  'from-blue-600 to-indigo-700',
+  'from-cyan-300 to-blue-400',
+  'from-indigo-400 to-blue-500',
+  // 퍼플·바이올렛 계열
+  'from-violet-200 to-purple-300',
+  'from-violet-400 to-purple-500',
+  'from-violet-600 to-purple-700',
+  'from-purple-300 to-violet-400',
+  // 스카이·틸 계열
+  'from-sky-200 to-teal-300',
+  'from-sky-400 to-cyan-500',
+  'from-sky-600 to-teal-600',
+  // 옐로·라임 계열
+  'from-yellow-200 to-lime-300',
+  'from-yellow-400 to-lime-400',
+  'from-lime-300 to-green-400',
+  // 레드·오렌지 계열
+  'from-red-300 to-orange-400',
+  'from-red-500 to-orange-500',
+  'from-red-700 to-rose-600',
 ]
 
 interface CommunityCardProps {
