@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
   let query = supabase
     .from('memos')
-    .select('id, title, content, created_at, updated_at')
+    .select('id, title, content, nickname, image_url, created_at, updated_at')
     .order('created_at', { ascending: false })
 
   if (search) {
@@ -27,8 +27,14 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json() as { title?: string; content?: string; password?: string }
-  const { title, content, password } = body
+  const body = await request.json() as {
+    title?: string
+    content?: string
+    password?: string
+    nickname?: string
+    image_url?: string
+  }
+  const { title, content, password, nickname, image_url } = body
 
   if (!title?.trim() || !content?.trim() || !password?.trim()) {
     return NextResponse.json({ error: '제목, 내용, 비밀번호를 모두 입력해주세요.' }, { status: 400 })
@@ -51,7 +57,13 @@ export async function POST(request: NextRequest) {
 
   const { data, error } = await supabase
     .from('memos')
-    .insert({ title: title.trim(), content: content.trim(), password_hash })
+    .insert({
+      title: title.trim(),
+      content: content.trim(),
+      password_hash,
+      nickname: nickname?.trim() || null,
+      image_url: image_url || null,
+    })
     .select('id, created_at')
     .single()
 

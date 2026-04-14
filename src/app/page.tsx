@@ -9,7 +9,7 @@ export default async function HomePage() {
 
   const { data } = await supabase
     .from('memos')
-    .select('id, title, content, created_at, updated_at')
+    .select('id, title, content, nickname, image_url, created_at, updated_at')
     .order('created_at', { ascending: false })
 
   const initialMemos: Memo[] = data ?? []

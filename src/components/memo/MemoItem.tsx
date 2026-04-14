@@ -16,11 +16,10 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
       <AnonymousAvatar seed={memo.id} />
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2 mb-1">
-          <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">익명</span>
-          <time
-            className="text-xs text-neutral-400 shrink-0"
-            dateTime={memo.created_at}
-          >
+          <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+            {memo.nickname ?? '익명'}
+          </span>
+          <time className="text-xs text-neutral-400 shrink-0" dateTime={memo.created_at}>
             {formatRelativeTime(memo.created_at)}
           </time>
         </div>
@@ -30,6 +29,12 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
         <p className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-3 break-words">
           {memo.content}
         </p>
+        {memo.image_url && (
+          <div className="mt-2 rounded-xl overflow-hidden border border-neutral-100 dark:border-neutral-800 w-24 h-24">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={memo.image_url} alt="첨부 이미지" className="w-full h-full object-cover" />
+          </div>
+        )}
       </div>
     </article>
   )

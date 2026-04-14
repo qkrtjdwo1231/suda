@@ -6,8 +6,14 @@ type Params = { params: Promise<{ id: string }> }
 
 export async function PATCH(request: NextRequest, { params }: Params) {
   const { id } = await params
-  const body = await request.json() as { title?: string; content?: string; password?: string }
-  const { title, content, password } = body
+  const body = await request.json() as {
+    title?: string
+    content?: string
+    password?: string
+    nickname?: string
+    image_url?: string
+  }
+  const { title, content, password, nickname, image_url } = body
 
   if (!title?.trim() || !content?.trim() || !password?.trim()) {
     return NextResponse.json({ error: '제목, 내용, 비밀번호를 모두 입력해주세요.' }, { status: 400 })
@@ -32,7 +38,13 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 
   const { error: updateError } = await supabase
     .from('memos')
-    .update({ title: title.trim(), content: content.trim(), updated_at: new Date().toISOString() })
+    .update({
+      title: title.trim(),
+      content: content.trim(),
+      nickname: nickname?.trim() || null,
+      image_url: image_url ?? undefined,
+      updated_at: new Date().toISOString(),
+    })
     .eq('id', id)
 
   if (updateError) {

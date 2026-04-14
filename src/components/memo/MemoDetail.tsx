@@ -56,7 +56,9 @@ export default function MemoDetail({ memo, onClose, onUpdate, onDelete }: MemoDe
           <div className="flex items-center gap-3">
             <AnonymousAvatar seed={current.id} />
             <div>
-              <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">익명</p>
+              <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                {current.nickname ?? '익명'}
+              </p>
               <time className="text-xs text-neutral-400" dateTime={current.created_at}>
                 {formatFullTime(current.created_at)}
               </time>
@@ -79,6 +81,17 @@ export default function MemoDetail({ memo, onClose, onUpdate, onDelete }: MemoDe
             {current.content}
           </p>
         </div>
+
+        {current.image_url && (
+          <div className="rounded-xl overflow-hidden border border-neutral-100 dark:border-neutral-800">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={current.image_url}
+              alt="첨부 이미지"
+              className="w-full max-h-72 object-contain bg-neutral-50 dark:bg-neutral-900"
+            />
+          </div>
+        )}
 
         {current.updated_at !== current.created_at && (
           <p className="text-xs text-neutral-400">
