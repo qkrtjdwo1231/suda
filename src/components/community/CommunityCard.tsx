@@ -62,7 +62,10 @@ export default function CommunityCard({ community, onUpdate, onDelete }: Communi
   const [deleteError, setDeleteError] = useState('')
   const [deleteLoading, setDeleteLoading] = useState(false)
 
-  const colorClass = CARD_COLORS[community.name.charCodeAt(0) % CARD_COLORS.length]
+  const colorIndex = community.id
+    .split('')
+    .reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % CARD_COLORS.length
+  const colorClass = CARD_COLORS[colorIndex]
 
   function truncateAtWord(text: string, max: number) {
     if (text.length <= max) return text
