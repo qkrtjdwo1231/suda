@@ -54,7 +54,11 @@ export default function MemoDetail({ memo, onClose, onUpdate, onDelete }: MemoDe
       <div className="p-5 space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
-            <AnonymousAvatar seed={current.id} />
+            <AnonymousAvatar
+              seed={current.id}
+              nickname={current.nickname}
+              profileImageUrl={current.profile_image_url}
+            />
             <div>
               <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                 {current.nickname ?? '익명'}

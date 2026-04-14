@@ -13,7 +13,11 @@ export default function MemoItem({ memo, onClick }: MemoItemProps) {
       onClick={() => onClick(memo)}
       className="flex gap-3 px-4 py-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
     >
-      <AnonymousAvatar seed={memo.id} />
+      <AnonymousAvatar
+        seed={memo.id}
+        nickname={memo.nickname}
+        profileImageUrl={memo.profile_image_url}
+      />
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2 mb-1">
           <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">

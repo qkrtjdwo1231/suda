@@ -6,20 +6,35 @@ const COLORS = [
 
 interface AnonymousAvatarProps {
   seed: string
+  nickname?: string | null
+  profileImageUrl?: string | null
   size?: 'sm' | 'md'
 }
 
-export default function AnonymousAvatar({ seed, size = 'md' }: AnonymousAvatarProps) {
+export default function AnonymousAvatar({ seed, nickname, profileImageUrl, size = 'md' }: AnonymousAvatarProps) {
+  const sizeClass = size === 'sm' ? 'w-8 h-8 text-xs' : 'w-9 h-9 text-sm'
+
+  if (profileImageUrl) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={profileImageUrl}
+        alt={nickname ?? '익명'}
+        className={`${sizeClass} rounded-full object-cover shrink-0`}
+      />
+    )
+  }
+
   const index = seed.charCodeAt(0) % COLORS.length
   const color = COLORS[index]
-  const sizeClass = size === 'sm' ? 'w-8 h-8 text-xs' : 'w-9 h-9 text-sm'
+  const letter = nickname?.trim() ? nickname.trim()[0] : '익'
 
   return (
     <div
       className={`${color} ${sizeClass} rounded-full flex items-center justify-center text-white font-semibold shrink-0`}
-      aria-label="익명 사용자"
+      aria-label={nickname ?? '익명'}
     >
-      익
+      {letter}
     </div>
   )
 }

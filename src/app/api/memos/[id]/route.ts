@@ -12,8 +12,9 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     password?: string
     nickname?: string
     image_url?: string
+    profile_image_url?: string
   }
-  const { title, content, password, nickname, image_url } = body
+  const { title, content, password, nickname, image_url, profile_image_url } = body
 
   if (!title?.trim() || !content?.trim() || !password?.trim()) {
     return NextResponse.json({ error: '제목, 내용, 비밀번호를 모두 입력해주세요.' }, { status: 400 })
@@ -43,6 +44,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
       content: content.trim(),
       nickname: nickname?.trim() || null,
       image_url: image_url ?? undefined,
+      profile_image_url: profile_image_url ?? undefined,
       updated_at: new Date().toISOString(),
     })
     .eq('id', id)
